@@ -35,7 +35,7 @@ node {
         sh 'kubectl run hi-app1 --image=kartikjalgaonkar/hi-world --port=8082'
         sleep 200
         sh 'kubectl get pods'
-        sh 'kubectl expose deployment hi-app1 --type=NodePort --port=8083 --target-port=8082'
+        sh 'kubectl expose deployment hi-app1 --type=LoadBalancer --port=8083 --target-port=8082'
         sh 'kubectl get svc'
         sh 'minikube dashboard'
         sh 'minikube service hi-app1'
