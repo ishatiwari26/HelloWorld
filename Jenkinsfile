@@ -30,7 +30,7 @@ node {
     
     stage('kubectl deploy'){
         sh 'minikube start'
-        sh 'kubectl run hello-world --replicas=2 --labels="run=load-balancer-example" --image=kartikjalgaonkar/hi-world  --port=8082'
+        sh 'kubectl run hello-world --replicas=2 --labels="run=load-balancer-example" --image=kartikjalgaonkar/hello-world  --port=8082'
         sleep 60
         sh 'kubectl get deployments hello-world'
         sh 'kubectl describe deployments hello-world'
