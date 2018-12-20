@@ -30,6 +30,8 @@ node {
     
     stage('kubectl deploy'){
         sh 'minikube start'
+        sh 'kubectl delete deployment hello-world'
+        sh 'kubectl delete svc hello-world'
         sh 'kubectl run hello-world --replicas=2 --labels="run=load-balancer-example" --image=kartikjalgaonkar/hello-world  --port=8082'
         sleep 60
         sh 'kubectl get deployments hello-world'
@@ -43,8 +45,7 @@ node {
         sh 'kubectl describe services my-service'
         sh 'kubectl get pods --output=wide'
         sh 'minikube service hello-world'
-        sh 'minikube dashboard'
-        
+        sh 'minikube dashboard'        
     }
    
 }
