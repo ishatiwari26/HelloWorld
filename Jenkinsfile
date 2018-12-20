@@ -38,11 +38,13 @@ node {
         sh 'kubectl describe replicasets'
         sh 'kubectl expose deployment hello-world --type=LoadBalancer --name=my-service'
         sh 'kubectl get services my-service'
-        sleep 60
+        sleep 100
+        sh 'kubectl get services my-service'
         sh 'kubectl describe services my-service'
         sh 'kubectl get pods --output=wide'
+        sh 'minikube service hello-world'
         sh 'minikube dashboard'
-        sh 'minikube service hi-app1'
+        
     }
    
 }
