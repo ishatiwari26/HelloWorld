@@ -30,13 +30,17 @@ node {
     
     stage('kubectl deploy'){
         sh 'minikube start'
-        sh 'kubectl delete deployment hi-app1'
-        sh 'kubectl delete svc hi-app1'
-        sh 'kubectl run hi-app1 --image=kartikjalgaonkar/hi-world --port=8082'
-        sleep 200
-        sh 'kubectl get pods'
-        sh 'kubectl expose deployment hi-app1 --type=LoadBalancer --port=8083 --target-port=8082'
-        sh 'kubectl get svc'
+        sh 'kubectl run hello-world --replicas=2 --labels="run=load-balancer-example" --image=kartikjalgaonkar/hi-world  --port=8082'
+        sleep 60
+        sh 'kubectl get deployments hello-world'
+        sh 'kubectl describe deployments hello-world'
+        sh 'kubectl get replicasets'
+        sh 'kubectl describe replicasets'
+        sh 'kubectl expose deployment hello-world --type=LoadBalancer --name=my-service'
+        sh 'kubectl get services my-service'
+        sleep 60
+        sh 'kubectl describe services my-service'
+        sh 'kubectl get pods --output=wide'
         sh 'minikube dashboard'
         sh 'minikube service hi-app1'
     }
