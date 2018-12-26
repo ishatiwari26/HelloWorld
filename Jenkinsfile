@@ -31,7 +31,7 @@ node {
     stage('kubectl deploy'){
         /*sh 'minikube start'*/
         /*sh 'minikube --vm-driver=kvm2 start'*/
-        sh ' minikube start --vm-driver kvm2 -v 7 --logtostderr'
+        sh 'minikube start --vm-driver kvm2 -v 7 --logtostderr'
         sh 'kubectl delete deployment hello-world'
         sh 'kubectl delete svc hello-world'
         sh 'kubectl run hello-world --replicas=2 --labels="run=load-balancer-example" --image=kartikjalgaonkar/hello-world  --port=8082'
